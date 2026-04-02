@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user of the application.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "User's unique ID." },
+        "username": { "type": "string", "description": "User's chosen username." },
+        "displayName": { "type": "string", "description": "User's display name." },
+        "photoURL": { "type": "string", "description": "User's profile photo URL." },
+        "createdAt": { "type": "timestamp", "description": "When the user was created." }
+      },
+      "required": ["uid", "username", "createdAt"]
+    },
+    "Card": {
+      "title": "Card",
+      "description": "An AI-generated trading card.",
+      "type": "object",
+      "properties": {
+        "authorId": { "type": "string", "description": "UID of the user who created the card." },
+        "authorUsername": { "type": "string", "description": "Username of the author." },
+        "characterName": { "type": "string", "description": "Name of the character." },
+        "animeSource": { "type": "string", "description": "Source anime of the character." },
+        "imageUrl": { "type": "string", "description": "URL of the generated card image." },
+        "pwr": { "type": "number", "description": "Power stat." },
+        "str": { "type": "number", "description": "Strength stat." },
+        "prompt": { "type": "string", "description": "Prompt used to generate the image." },
+        "createdAt": { "type": "timestamp", "description": "When the card was created." },
+        "isPublic": { "type": "boolean", "description": "Whether the card is public in the gallery." }
+      },
+      "required": ["authorId", "authorUsername", "characterName", "animeSource", "imageUrl", "pwr", "str", "createdAt", "isPublic"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Stores user profiles."
+    },
+    "/cards/{cardId}": {
+      "schema": { "$ref": "#/entities/Card" },
+      "description": "Stores generated cards."
+    }
+  }
+}
